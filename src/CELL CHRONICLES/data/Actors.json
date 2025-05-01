@@ -1,0 +1,11 @@
+[
+null,
+{"id":1,"battlerName":"Neutrophils","characterIndex":0,"characterName":"Main Character","classId":1,"equips":[1,27,52,8,75],"faceIndex":0,"faceName":"Main Character Face","traits":[],"initialLevel":1,"maxLevel":99,"name":"Neutrophils","nickname":"NRS-100","note":"","profile":""},
+{"id":2,"battlerName":"Macrophages","characterIndex":1,"characterName":"Main Character","classId":2,"equips":[20,35,61,16,74],"faceIndex":1,"faceName":"Main Character Face","traits":[],"initialLevel":1,"maxLevel":99,"name":"Monocyte","nickname":"MCT-90","note":"","profile":""},
+{"id":3,"battlerName":"Eosinophils","characterIndex":2,"characterName":"Main Character","classId":3,"equips":[37,0,47,3,83],"faceIndex":2,"faceName":"Main Character Face","traits":[],"initialLevel":1,"maxLevel":99,"name":"Eosinophils","nickname":"ENS-95","note":"","profile":""},
+{"id":4,"battlerName":"Lymphocytes B Cell","characterIndex":3,"characterName":"Main Character","classId":4,"equips":[8,40,49,3,81],"faceIndex":3,"faceName":"Main Character Face","traits":[],"initialLevel":1,"maxLevel":99,"name":"Lymphocytes","nickname":"B Cell","note":"","profile":""},
+{"id":5,"battlerName":"","characterIndex":0,"characterName":"","classId":1,"equips":[0,0,0,0,0],"faceIndex":0,"faceName":"","traits":[],"initialLevel":1,"maxLevel":99,"name":"","nickname":"","note":"","profile":""},
+{"id":6,"battlerName":"","characterIndex":0,"characterName":"","classId":1,"equips":[0,0,0,0,0],"faceIndex":0,"faceName":"","traits":[],"initialLevel":1,"maxLevel":99,"name":"","nickname":"","note":"","profile":""},
+{"id":7,"battlerName":"","characterIndex":0,"characterName":"","classId":1,"equips":[0,0,0,0,0],"faceIndex":0,"faceName":"","traits":[],"initialLevel":1,"maxLevel":99,"name":"","nickname":"","note":"","profile":""},
+{"id":8,"battlerName":"","characterIndex":0,"characterName":"","classId":1,"equips":[0,0,0,0,0],"faceIndex":0,"faceName":"","traits":[],"initialLevel":1,"maxLevel":99,"name":"","nickname":"","note":"","profile":""}
+]
