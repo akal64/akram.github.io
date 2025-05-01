@@ -76,9 +76,67 @@ function initializeLightbox() {
     document.addEventListener('keydown', (e) => e.key === 'Escape' && lightbox.classList.contains('active') && closeLightboxHandler());
 }
 
+// Cookie Consent functionality
+function initializeCookieConsent() {
+    const cookieConsent = document.getElementById('cookie-consent');
+    const acceptCookies = document.getElementById('accept-cookies');
+    const declineCookies = document.getElementById('decline-cookies');
+
+    if (!cookieConsent || !acceptCookies || !declineCookies) return;
+
+    // Check if user has already made a choice
+    const cookieChoice = localStorage.getItem('cookieConsent');
+    
+    if (!cookieChoice) {
+        // Show the cookie consent banner if no choice has been made
+        setTimeout(() => {
+            cookieConsent.classList.add('show');
+        }, 1000);
+    }
+
+    // Handle accept cookies
+    acceptCookies.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        cookieConsent.classList.remove('show');
+        // Here you can initialize any cookies or tracking scripts
+    });
+
+    // Handle decline cookies
+    declineCookies.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'declined');
+        cookieConsent.classList.remove('show');
+        // Here you can disable any cookies or tracking scripts
+    });
+}
+
+// Skill bars animation
+function initializeSkillBars() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target;
+                const width = progressBar.style.width;
+                progressBar.style.width = '0';
+                setTimeout(() => {
+                    progressBar.style.width = width;
+                }, 100);
+                observer.unobserve(progressBar);
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    skillBars.forEach(bar => observer.observe(bar));
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initializeLightbox();
+    initializeCookieConsent();
+    initializeSkillBars();
     
     const playOverlay = document.querySelector('.play-overlay');
     if (playOverlay) {
