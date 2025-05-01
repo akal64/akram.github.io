@@ -63,6 +63,16 @@
         .back-btn i {
             margin-right: 0.5rem;
         }
+
+        .error-message {
+            color: var(--primary-color);
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 2rem;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -70,6 +80,10 @@
         <div class="game-header">
             <h1 class="game-title" id="game-title">Game Title</h1>
             <a href="index.html" class="back-btn" aria-label="Back to Portfolio"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+        <div id="error-message" class="error-message">
+            <h2>Game Loading Error</h2>
+            <p>The game could not be loaded. Please check if the game files are properly uploaded to the repository.</p>
         </div>
         <iframe id="game-frame" class="game-frame" title="Game Frame" loading="lazy" allowfullscreen></iframe>
     </main>
@@ -79,13 +93,32 @@
         const urlParams = new URLSearchParams(window.location.search);
         const gameUrl = urlParams.get('game');
         const gameTitle = urlParams.get('title');
+        const gameFrame = document.getElementById('game-frame');
+        const errorMessage = document.getElementById('error-message');
 
-        // Set game title and iframe source
+        // Set game title
         if (gameTitle) {
             document.getElementById('game-title').textContent = gameTitle;
         }
+
+        // Load game with error handling
         if (gameUrl) {
-            document.getElementById('game-frame').src = gameUrl;
+            gameFrame.onerror = () => {
+                gameFrame.style.display = 'none';
+                errorMessage.style.display = 'block';
+            };
+
+            gameFrame.onload = () => {
+                gameFrame.style.display = 'block';
+                errorMessage.style.display = 'none';
+            };
+
+            // Set the game source
+            gameFrame.src = gameUrl;
+        } else {
+            gameFrame.style.display = 'none';
+            errorMessage.style.display = 'block';
+            errorMessage.querySelector('p').textContent = 'No game URL provided.';
         }
     </script>
 </body>
