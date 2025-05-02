@@ -73,13 +73,93 @@
             margin: 2rem;
             display: none;
         }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .control-btn {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-btn:hover {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .game-frame.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            border-radius: 0;
+        }
+
+        @media (max-width: 768px) {
+            .game-frame.fullscreen {
+                width: 100vw;
+                height: 100vh;
+            }
+        }
+
+        .download-btn {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .download-btn:hover {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .download-btn i {
+            margin-right: 0.5rem;
+        }
     </style>
 </head>
 <body>
     <main class="game-container">
         <div class="game-header">
             <h1 class="game-title" id="game-title">Game Title</h1>
-            <a href="index.html" class="back-btn" aria-label="Back to Portfolio"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+            <div class="controls">
+                <button id="fullscreen-btn" class="control-btn" aria-label="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i> Fullscreen
+                </button>
+                <button id="rotate-btn" class="control-btn" aria-label="Toggle Screen Rotation">
+                    <i class="fas fa-sync"></i> Rotate
+                </button>
+                <a id="download-btn" href="#" class="download-btn" aria-label="Download Game">
+                    <i class="fas fa-download"></i> Download
+                </a>
+                <a href="index.html" class="back-btn" aria-label="Back to Portfolio">
+                    <i class="fas fa-arrow-left"></i> Back to Portfolio
+                </a>
+            </div>
         </div>
         <div id="error-message" class="error-message">
             <h2>Game Loading Error</h2>
@@ -119,6 +199,67 @@
             gameFrame.style.display = 'none';
             errorMessage.style.display = 'block';
             errorMessage.querySelector('p').textContent = 'No game URL provided.';
+        }
+
+        // Fullscreen functionality
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const rotateBtn = document.getElementById('rotate-btn');
+
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                gameFrame.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+                gameFrame.classList.add('fullscreen');
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> Exit Fullscreen';
+            } else {
+                document.exitFullscreen();
+                gameFrame.classList.remove('fullscreen');
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
+            }
+        });
+
+        // Screen rotation functionality
+        let isRotated = false;
+        rotateBtn.addEventListener('click', async () => {
+            try {
+                if (!isRotated) {
+                    await screen.orientation.lock('landscape');
+                    rotateBtn.innerHTML = '<i class="fas fa-sync"></i> Unlock Rotation';
+                } else {
+                    await screen.orientation.unlock();
+                    rotateBtn.innerHTML = '<i class="fas fa-sync"></i> Rotate';
+                }
+                isRotated = !isRotated;
+            } catch (err) {
+                console.error(`Error attempting to change screen orientation: ${err.message}`);
+            }
+        });
+
+        // Handle fullscreen change events
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                gameFrame.classList.remove('fullscreen');
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
+            }
+        });
+
+        // Download functionality
+        const downloadBtn = document.getElementById('download-btn');
+
+        // Set download link based on game title
+        if (gameTitle === 'Cell Chronicles') {
+            downloadBtn.href = 'https://akirafuna64.itch.io/cell-chronicles';
+            downloadBtn.target = '_blank';
+            downloadBtn.rel = 'noopener noreferrer';
+            downloadBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Download on itch.io';
+        } else if (gameTitle === 'Mysterious Temple Treasure') {
+            downloadBtn.href = 'https://akirafuna64.itch.io/the-mysterious-temple-treasure';
+            downloadBtn.target = '_blank';
+            downloadBtn.rel = 'noopener noreferrer';
+            downloadBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Download on itch.io';
+        } else {
+            downloadBtn.style.display = 'none';
         }
     </script>
 </body>

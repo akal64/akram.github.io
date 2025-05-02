@@ -1247,4 +1247,70 @@ footer {
     .contact-info h3 {
         font-size: 1.1rem;
     }
+}
+
+/* Social Links in Contact Section */
+.social-links .social-icons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.social-links .social-icons a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    transition: all 0.3s ease;
+    justify-content: center;
+}
+
+.social-links .social-icons a:hover {
+    background: rgba(0, 255, 136, 0.2);
+    transform: translateY(-2px);
+}
+
+.social-links .social-icons i {
+    font-size: 1.2rem;
+}
+
+.social-links .social-icons span {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .social-links .social-icons {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Download Link Styles */
+.download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    transition: all 0.3s ease;
+}
+
+.download-link:hover {
+    background: rgba(0, 255, 136, 0.2);
+    transform: translateY(-2px);
+}
+
+.download-link i {
+    font-size: 1rem;
 } 
